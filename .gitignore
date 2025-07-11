@@ -524,3 +524,4 @@ tools/issue-labeler/src/IssueLabeler/Properties/ServiceDependencies/
 
 # Go Parser
 apiviewgo.exe
+/src/dotnet/APIView/APIViewWeb/wwwroot/spa

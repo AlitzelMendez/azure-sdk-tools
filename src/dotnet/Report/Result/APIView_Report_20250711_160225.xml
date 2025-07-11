@@ -1,0 +1,774 @@
+<?xml version="1.0"?>
+<?mso-application progid="Excel.Sheet"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:o="urn:schemas-microsoft-com:office:office"
+ xmlns:x="urn:schemas-microsoft-com:office:excel"
+ xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+ xmlns:html="http://www.w3.org/TR/REC-html40">
+ <DocumentProperties xmlns="urn:schemas-microsoft-com:office:office">
+  <Title>APIView Report</Title>
+  <Author>APIView Report Generator</Author>
+  <Created>2025-07-11T16:02:25Z</Created>
+ </DocumentProperties>
+ <Styles>
+  <Style ss:ID="HeaderStyle">
+   <Font ss:Bold="1"/>
+   <Interior ss:Color="#D3D3D3" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="BooleanTrueStyle">
+   <Interior ss:Color="#90EE90" ss:Pattern="Solid"/>
+  </Style>
+  <Style ss:ID="BooleanFalseStyle">
+   <Interior ss:Color="#FFB6C1" ss:Pattern="Solid"/>
+  </Style>
+ </Styles>
+ <Worksheet ss:Name="APIView Report">
+  <Table>
+   <Row>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Review ID</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Review Name</Data></Cell>
+    <Cell ss:StyleID="HeaderStyle"><Data ss:Type="String">Is TypeSpec Base</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">c1d45c1a03de44a199505eec04623fec</Data></Cell>
+    <Cell><Data ss:Type="String">azure-ai-agents</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">183e3acafcc945aea46f40ec9f1e81b6</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.AppConfiguration</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">bcebe2031ee74664b0b199d68bcb60f4</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.AppConfiguration</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ecca0741171340e4b5a6585c42cee7d3</Data></Cell>
+    <Cell><Data ss:Type="String">sdk/resourcemanager/appconfiguration/armappconfiguration</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">9e8653646a734630add21aae0e73a1d7</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-appconfiguration</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">c6b028dbe2e641519e954f72ee9cdee8</Data></Cell>
+    <Cell><Data ss:Type="String">com.azure.resourcemanager:azure-resourcemanager-appconfiguration</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">18307ac6b254490aae1655ebd9a54292</Data></Cell>
+    <Cell><Data ss:Type="String">azure-mgmt-appconfiguration</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">fc535e834f9e4a8eb01b19f8a2b491ae</Data></Cell>
+    <Cell><Data ss:Type="String">com.azure.resourcemanager:azure-resourcemanager-resources-deploymentstacks</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">d28b672c0cb14cfca77ffba2462891b1</Data></Cell>
+    <Cell><Data ss:Type="String">azure_storage_blob</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">97d7a646efac49c8be320242e63acef0</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-storagemover</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">c94c19f7a8354305ab1618e4a8022775</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-storagemover</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">98e0fa4373924c7dba4ebce19cda04e6</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.ResourceManager.StorageMover</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">284ef19103c8477fa55b3e1894b70d60</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-storagemover</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">f7d2d78e91ca4d76b3022c11758ab219</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.Provisioning</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">fb9ecfe2bcda4bfa99814c4671bd50c7</Data></Cell>
+    <Cell><Data ss:Type="String">com.azure.resourcemanager:azure-resourcemanager-storagemover</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">e1a101bdd216415e9006811fb918ec77</Data></Cell>
+    <Cell><Data ss:Type="String">azure-mgmt-storagemover</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">29ed9936ebe545b198091897733187cd</Data></Cell>
+    <Cell><Data ss:Type="String">Private.Poc360</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">3be2741e9f544322aaea0866432bcf40</Data></Cell>
+    <Cell><Data ss:Type="String">Private.Poc360</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">830f572139a44b31b964bf0cebfeb017</Data></Cell>
+    <Cell><Data ss:Type="String">sdk/resourcemanager/extmanagedoperations/armextmanagedoperations</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">b3c2eaaca36847ad9a2ba7739df8b873</Data></Cell>
+    <Cell><Data ss:Type="String">azure-mgmt-extmanagedoperations</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">591ebe9929a4486c9eb7663065cc4e5f</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-extmanagedoperations</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ddb9929bd89c4fcf9e9ca645cb4fe49e</Data></Cell>
+    <Cell><Data ss:Type="String">com.azure.resourcemanager:azure-resourcemanager-extmanagedoperations</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">d1103b4bfd2a496a94b2460082f639c1</Data></Cell>
+    <Cell><Data ss:Type="String">@azure-rest/ai-translation-document</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">880a29e5717b40cca26101aef267a026</Data></Cell>
+    <Cell><Data ss:Type="String">@azure-rest/ai-translation-text</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">717c0d6d21c74ec487ac249ef91f014f</Data></Cell>
+    <Cell><Data ss:Type="String">AnomalyDetector-Language</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">c748a31812b64559ab789e3177039e00</Data></Cell>
+    <Cell><Data ss:Type="String">AnomalyDetector-Language</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">0df630299b6a46469c39170df1801b94</Data></Cell>
+    <Cell><Data ss:Type="String">Language.Text.Authoring</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">6642f1ed4d7d4d60b41228384db67ed6</Data></Cell>
+    <Cell><Data ss:Type="String">Language.Text.Authoring</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">5a7f1a50360d4674a449c4d8fc3d3d3e</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.Azure.WebJobs.Extensions.Storage</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">912fb04ec80e48b99aa66ca66fab5f2b</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-azurestackhci</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">3b7c9c468cff41efafe7fab3d916803b</Data></Cell>
+    <Cell><Data ss:Type="String">azure-mgmt-azurestackhci</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">268020fb000f41ee9759ea562e664f00</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/storage-blob</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">29abfe4af9874a8ab7de1645e9608333</Data></Cell>
+    <Cell><Data ss:Type="String">AnomalyDetector-Language</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">dfb681945b284ca9ad7d55f9a60dd258</Data></Cell>
+    <Cell><Data ss:Type="String">AnomalyDetector-Language</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">9f7763ab86244f9eb5b20b127c060dba</Data></Cell>
+    <Cell><Data ss:Type="String">Language.Text.Authoring</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">1a7c818f50cd4ec58fe90928b3421b5c</Data></Cell>
+    <Cell><Data ss:Type="String">Language.Text.Authoring</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ff0f23dc07534fec8474ca0fab07f8f9</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.ResourceManager.EventHubs</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">8ab3b6d0daec499a9e3a6052a5b3fde5</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.AI.Language.Text.Authoring</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">5d02627a3db54099a3d2e1c4eb5aede9</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-carbonoptimization</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ae869a42cc584145999c15f05af253d7</Data></Cell>
+    <Cell><Data ss:Type="String">sdk/resourcemanager/compute/armcompute</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">e40f450d6524422baa9a783ba2db12e0</Data></Cell>
+    <Cell><Data ss:Type="String">com.azure.resourcemanager:azure-resourcemanager-compute-generated</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">0d899d6401c34371af4aca8240c08e28</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-compute</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">6983a5b70093474f9811b6da55d1168e</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.ResourceManager.Compute</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">e3be51b1d9be400088729c56aeb318b2</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-storageactions</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">cb8991de549e42d28a0650f110accf1a</Data></Cell>
+    <Cell><Data ss:Type="String">loadtesting-loadtesting</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">28f21a373cb94e5bacf1f3acd8383b9a</Data></Cell>
+    <Cell><Data ss:Type="String">loadtesting-loadtesting</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">94d69287b7404e50853526dbca89a2c1</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/armplaceholder</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">36e8fdd5805641fb956ee782d8f7e461</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.ResourceManager.PlanetaryComputer</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">e68fd93dea174541934f9a2d01d9e392</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-applicationmigration</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">e42f1e3ef07842789f37eb08e33518ad</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.Migrate-Microsoft.OffAzure</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">eefb4f54304e4674b73da6e17f51c302</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.Migrate-Microsoft.OffAzure</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">a379ebddfccd4bf8a887bb8add5f59ba</Data></Cell>
+    <Cell><Data ss:Type="String">sdk/resourcemanager/migrationdiscovery/armmigrationdiscovery</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">7ddffb3557d44c4f821eba87c12a43e3</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-migrationdiscovery</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">7380ac6f44c740da951acf2f54e2e697</Data></Cell>
+    <Cell><Data ss:Type="String">azure-mgmt-migrationdiscovery</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">39b7c36c2dea4aef985008c0080bf5ff</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.ApplicationMigration</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">90b56af69a424936b6e9db6f69afe2f5</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.ApplicationMigration</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">98d56f5c8a004a6baaf90eae2832c69f</Data></Cell>
+    <Cell><Data ss:Type="String">sdk/resourcemanager/placeholder/armplaceholder</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">7b4fc9189f7c4811809d8b541732b167</Data></Cell>
+    <Cell><Data ss:Type="String">azure-mgmt-placeholder</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">5dbfe3a4867040a890c362c4fd27c08e</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.ManagedNetworkFabric</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">5c004ad5cc7a45629d8814e624dba8e4</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.ManagedNetworkFabric</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">f38253ddf10049e1b3d8d43e5b59528a</Data></Cell>
+    <Cell><Data ss:Type="String">com.azure.resourcemanager:azure-resourcemanager-managednetworkfabric</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">3f14fa5189d44fd88308e0b020ed1a6d</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.ManagedNetworkFabric</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">81fc9e83ea5b43b582b8a1fd354e1f4b</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.ManagedNetworkFabric</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">830d7ffbbb8c40b3b060d782de6320f7</Data></Cell>
+    <Cell><Data ss:Type="String">com.azure.resourcemanager:azure-resourcemanager-managednetworkfabric</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">08e498b7119b40c4a2ae3c28f76a70b6</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/ai-projects</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">2f39b542142146399618e33d797aabca</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.AI.Projects</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">c2f60f8ad6e049a29a5e0fe90d040d3b</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.AI.Projects</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">5f4245cf3ee843bfa4ad8d98f3382471</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/ai-projects</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">a0def2db01534d91b991324c13f62946</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.AI.Projects</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">8505d9ed93f947728793f9ef51a6756b</Data></Cell>
+    <Cell><Data ss:Type="String">azure-ai-projects</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">e71a55d70f364a61aaf3d2914017ff45</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.Authorization</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">e4eb42129e2a474e8f52c33cbb6a8cc8</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.Authorization</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">e2a3b7be7239468a929f7a15c5bcc106</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.DBforMySQL</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">fbe086ffb84d4e278059ba1359a9c7f4</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.DBforMySQL</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">c3a1407115a440208891bf4333fba3ae</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.Synapse</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">06fd1095c0524f7f91cd0f35182cfce7</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.Synapse</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">421ceef7b870483e80bd37d9b1e591d1</Data></Cell>
+    <Cell><Data ss:Type="String">sdk/resourcemanager/resources/armpolicy</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">fd35061ae1a94adf98ad0a6964387f00</Data></Cell>
+    <Cell><Data ss:Type="String">sdk/resourcemanager/databoundaries/armdataboundaries</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">0bda930ccfe94d51a93251bf49b8cd26</Data></Cell>
+    <Cell><Data ss:Type="String">sdk/resourcemanager/synapse/armsynapse</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">c803554ce15d4aa884872c27ce18c9d8</Data></Cell>
+    <Cell><Data ss:Type="String">com.azure.resourcemanager:azure-resourcemanager-resources-generated</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">628066a4060a4559baef62490a08277f</Data></Cell>
+    <Cell><Data ss:Type="String">com.azure.resourcemanager:azure-resourcemanager-synapse</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">5b82e5e6ff5e444cae621a7579db2155</Data></Cell>
+    <Cell><Data ss:Type="String">Private.OracleDatabaseDev</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">5e08977142904969aa4691afd3079932</Data></Cell>
+    <Cell><Data ss:Type="String">Private.OracleDatabaseDev</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">b6d4a6a8d8e241f39cd175badeb09c0f</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-changes</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">e016cb4052f04c8c83aea3272ae131b7</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-databoundaries</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">7a71ac11984f4467a3cd7cb7bcfb92be</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.ResourceManager.Compute</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">58e0d8d6e8294ea29238123f0d94c7ad</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-features</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">84fe5e7b2cc344ab8db64df91002a546</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-links</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">33da121112f04399819bf7199995186b</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-locks</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">9b28e68a34354f75b1fa613fe8363308</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-managedapplications</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">9d2ca87982a14ac9977a8da0cc634a23</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-policy</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">5ece5315e30143738cca7191da120ffc</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-resources</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">cabf9bcac66c4e5b978f0632d4160937</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-synapse</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">e8ca53d7e37e4926925136e90a559579</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.AI.Agents.Persistent</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">7092ce3461e34a0c978a036ab6d8c0bd</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.ResourceManager.Compute</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">54f2721d2b1147ee891e7260f4ead148</Data></Cell>
+    <Cell><Data ss:Type="String">azure-ai-agents</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">6b042c962d6149a0ac44255d29e07c72</Data></Cell>
+    <Cell><Data ss:Type="String">sdk/resourcemanager/Private.OracleDatabaseDev/armoracledatabase</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">eff9a40cbc1843d0aa8bbe4cb5d6cd05</Data></Cell>
+    <Cell><Data ss:Type="String">com.azure.resourcemanager:azure-resourcemanager-oracledatabase</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">f062c93bc5be4d89b8bade0a5456d6e7</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-Private.OracleDatabaseDev</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">aa9243821116475e9c856ab30eda780c</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.Dashboard</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">2794569e9af04936966505c852a43d20</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.Dashboard</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">8eb83badc7144a14aac02fb6a49cf80d</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.Dashboard</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">69b662526fd3485295fd69f09fdad541</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.Dashboard</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">0c2c4a1a8ad04ffcb2b7e2439a22afca</Data></Cell>
+    <Cell><Data ss:Type="String">sdk/resourcemanager/dashboard/armdashboard</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ad795c88d30349e58ee370bc17e1160d</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-dashboard</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">967dac6b7fda4509b4520e5ab1c9fc72</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.ResourceManager.Grafana</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">17b97bd9c1d54f638e70d605e9e3ec56</Data></Cell>
+    <Cell><Data ss:Type="String">com.azure.resourcemanager:azure-resourcemanager-dashboard</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">c62bf3550e4848f795c95afe07372d40</Data></Cell>
+    <Cell><Data ss:Type="String">azure-mgmt-dashboard</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ceb55671bb544aca8263b6dab0797c8e</Data></Cell>
+    <Cell><Data ss:Type="String">OpenAI</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">9734cd094fae40af9908cb147985ab56</Data></Cell>
+    <Cell><Data ss:Type="String">azure-ai-agents</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">ddd926eaec3f41f4a9bdc103e11b374a</Data></Cell>
+    <Cell><Data ss:Type="String">sdk/resourcemanager/quantum/armquantum</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">c3d0f3fd2ba54067a5039a1162768d1d</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.EventGrid.SystemEvents</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">22b1faab15fa45878e03ef0e29e27528</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.EventGrid.SystemEvents</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">df962f4f3c19436da1b330d393bc1592</Data></Cell>
+    <Cell><Data ss:Type="String">sdk/messaging/eventgrid/azsystemevents</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4f7dfa6d87564c218231b0eb85a7eb43</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.Quantum</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">0fb52056b0d649fc9521713ec147562c</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.Quantum</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">2a8433a7c2eb46f0beabfd83c8466b00</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/eventgrid-systemevents</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">e9961a71e25b426ea03d49042571cd53</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.AI.Agents.Persistent</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">7ef97bb71a014193b7736fbf257f14af</Data></Cell>
+    <Cell><Data ss:Type="String">com.azure.resourcemanager:azure-resourcemanager-quantum</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">60efee73b6d7466cbd1d89c007e15b90</Data></Cell>
+    <Cell><Data ss:Type="String">Private.AzureChangeControl</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">92e3b09e94554d95ab110506db418c4e</Data></Cell>
+    <Cell><Data ss:Type="String">Private.AzureChangeControl</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">f678ef754a8948bdbdcb38a9636e70a7</Data></Cell>
+    <Cell><Data ss:Type="String">sdk/resourcemanager/changesafety/armchangesafety</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">a2ff29ed9130444dbe207f1fa9b85135</Data></Cell>
+    <Cell><Data ss:Type="String">com.azure.resourcemanager:azure-resourcemanager-azurechangecontrol</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">694d86f97e21422d921bb3a478f12315</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-changeSafety</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">da67740c6c6d443a8d026c41b1137a13</Data></Cell>
+    <Cell><Data ss:Type="String">azure-mgmt-changeSafety</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">763aaebdcf9246a09da39b88b44f6579</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.AI.Projects</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">fd987f79d9d6492490c39afd827ec277</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.IoTFirmwareDefense</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">202ede7a39974b4c888018ee4c340ae0</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.IoTFirmwareDefense</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">0dd5f7811c1c4fb2b0cfb3ecade002c4</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/arm-fist</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">5b4e0bfca26249258508b6905ebfcacd</Data></Cell>
+    <Cell><Data ss:Type="String">com.azure.resourcemanager:azure-resourcemanager-iotfirmwaredefense</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">0483fc5586764f58817a4fbd8dd490fb</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.Messaging.WebPubSub</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">452ad93fff334782a56420f78230c30f</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.Messaging.WebPubSub</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">4e100e60ed294ec6acadcfe83a8d6ca4</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.Messaging.WebPubSub</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">a6f7473a191840af8b380c8edf24bd2b</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.AI.Projects</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">60188f4d289c41e884f12596c600df5a</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.AI.OpenAI</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">92a0d59de81245caa6d1956657a90889</Data></Cell>
+    <Cell><Data ss:Type="String">Mise.ProtocolValidation</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">c3b7fc3695c9455e9c2871143caddf50</Data></Cell>
+    <Cell><Data ss:Type="String">@azure/ai-projects</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">c2795535d8c249f4a8fe977d45a96756</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.Communication.CallAutomation</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">f0516fa9360b405ab03eb91930945864</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.AI.Projects</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">949489c1433f47c4a2b597b61afb07d8</Data></Cell>
+    <Cell><Data ss:Type="String">sdk/monitor/ingestion/azlogs</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">6f14d39f879e4f30a5c40f425f5b5a4f</Data></Cell>
+    <Cell><Data ss:Type="String">Mise.ProtocolValidation</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">217399fce63949e28e83c26908d36b43</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.DocumentDB</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">1c6b4d62e1c14902b7cc47efb8609f85</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.DocumentDB</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">e7f824dd736e418db493fc3edb08e788</Data></Cell>
+    <Cell><Data ss:Type="String">sdk/resourcemanager/cosmos/armcosmos</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">1ea2c7b8d7044228ba61a7573d4df7f9</Data></Cell>
+    <Cell><Data ss:Type="String">com.azure.resourcemanager:azure-resourcemanager-cosmos-generated</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">5f7adb19cf0b48cf87a1a26f133f95bd</Data></Cell>
+    <Cell><Data ss:Type="String">Azure.ResourceManager.CosmosDB</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">f8fcf128397945e7b6da60d09d3ef453</Data></Cell>
+    <Cell><Data ss:Type="String">Microsoft.ErrorInsights</Data></Cell>
+    <Cell ss:StyleID="BooleanTrueStyle"><Data ss:Type="String">Yes</Data></Cell>
+   </Row>
+   <Row>
+    <Cell><Data ss:Type="String">bf545c5f0b9e4deeb6a092d358056b35</Data></Cell>
+    <Cell><Data ss:Type="String">azure-mgmt-cosmosdb</Data></Cell>
+    <Cell ss:StyleID="BooleanFalseStyle"><Data ss:Type="String">No</Data></Cell>
+   </Row>
+  </Table>
+ </Worksheet>
+</Workbook>
