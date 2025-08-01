@@ -15,6 +15,11 @@ namespace Report.Models
 
         [JsonPropertyName("PackageName")]
         public string PackageName { get; set; } = string.Empty;
+        [JsonPropertyName("PackageVersion")]
+        public string PackageVersion { get; set; } = string.Empty;
+
+        [JsonPropertyName("ParserVersion")]
+        public string ParserVersion { get; set; } = string.Empty;
     }
 
     public class ReviewLine

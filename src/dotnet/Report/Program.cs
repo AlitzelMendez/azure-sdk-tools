@@ -5,6 +5,7 @@ using Azure.Identity;
 using Microsoft.Extensions.Configuration;
 using Report.Models;
 using System.Text.Json;
+using Report.Helper;
 
 namespace Report
 {
@@ -58,11 +59,18 @@ namespace Report
                         if (result != null)
                         {
                             apiViewDocuments.Add(result);
+                            var linesAnalysis = IdentifyHandwrittenLines.GetLinesAnalysis(result);
                             reportResult.Row.Add(new RowReport()
                             {
-                                IsTypeSpecBase = !string.IsNullOrEmpty(result.CrossLanguagePackageId),
-                                ReviewName = result.PackageName,
-                                RevisionId = document.Id
+                                PackageName = result.PackageName,
+                                RevisionId = document.Id,
+                                TotalLines = linesAnalysis.TotalLines,
+                                HandwrittenLines = linesAnalysis.HandwrittenLines,
+                                Language = result.Language,
+                                PackageVersion = result.PackageVersion,
+                                ParserVersion = result.ParserVersion,
+                                CreatedOn = latestFile.CreationDate,
+
                             });
                             Console.WriteLine($"File {latestFile.FileId} downloaded and parsed successfully.");
                         }
@@ -80,8 +88,11 @@ namespace Report
                 Console.WriteLine("File download process completed.");
                 //NOW LETS PROCESS THE DATA! LET'S CREATE THE REPORT
                 
-                // Generate Excel XML report
-                await GenerateExcelXmlReportAsync(reportResult);
+                // Generate CSV report (best for Power BI)
+                await GenerateCsvReportAsync(reportResult);
+                
+                // Also generate Excel XLSX if needed
+             //   await GenerateExcelReportAsync(reportResult);
                 
                 Console.WriteLine($"Report generated with {reportResult.Row.Count} rows.");
 
@@ -130,7 +141,7 @@ namespace Report
                     c.id as Id,
                     c.Files
                 FROM c 
-                WHERE c.CreatedOn > ""2025-07-11T00:00:00Z""
+                WHERE c.CreatedOn >= ""2025-07-01T00:00:00Z"" 
                 ";
 
             var queryDefinition = new QueryDefinition(query);
@@ -284,102 +295,91 @@ namespace Report
             }
         }
 
-        private static async Task GenerateExcelXmlReportAsync(Models.Report report)
+        private static async Task GenerateCsvReportAsync(Models.Report report)
         {
             try
             {
-                Console.WriteLine("Generating Excel XML report...");
+                Console.WriteLine("Generating CSV report...");
 
-                var xmlContent = GenerateExcelXmlContent(report);
+                var csv = new StringBuilder();
                 
-                var outputPath = Path.Combine("C:\\Repositories\\azure-sdk-tools\\src\\dotnet\\Report\\Result\\", $"APIView_Report_{DateTime.Now:yyyyMMdd_HHmmss}.xml");
-                await File.WriteAllTextAsync(outputPath, xmlContent);
+                // Header row
+                csv.AppendLine("CreatedOn,ParserVersion,Language,APIRevisionId,PackageName,PackageVersion,HandwrittenLinesCount,TotalLines,HandwrittenPercentage");
 
-                Console.WriteLine($"Excel XML report saved to: {outputPath}");
-                Console.WriteLine("You can open this file in Microsoft Excel.");
+                // Data rows
+                foreach (var row in report.Row)
+                {
+                    // Calculate percentage of handwritten lines
+                    var handwrittenPercentage = row.TotalLines > 0 ? Math.Round((double)row.HandwrittenLines / row.TotalLines * 100, 2) : 0;
+
+                    csv.AppendLine($"{EscapeCsv(row.CreatedOn.ToString("o"))},{EscapeCsv(row.ParserVersion)},{EscapeCsv(row.Language)},{EscapeCsv(row.RevisionId)},{EscapeCsv(row.PackageName)},{EscapeCsv(row.PackageVersion)},{row.HandwrittenLines},{row.TotalLines},{handwrittenPercentage}");
+                }
+                
+                var outputPath = Path.Combine("C:\\Repositories\\azure-sdk-tools\\src\\dotnet\\Report\\Result\\", $"APIView_Report_{DateTime.Now:yyyyMMdd_HHmmss}.csv");
+                await File.WriteAllTextAsync(outputPath, csv.ToString());
+
+                Console.WriteLine($"CSV report saved to: {outputPath}");
+                Console.WriteLine("You can import this CSV file directly into Power BI.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Error generating Excel XML report: {ex.Message}");
+                Console.WriteLine($"Error generating CSV report: {ex.Message}");
             }
         }
 
-        private static string GenerateExcelXmlContent(Models.Report report)
+        private static async Task GenerateExcelReportAsync(Models.Report report)
         {
-            var xml = new StringBuilder();
-            
-            // Excel XML header
-            xml.AppendLine("<?xml version=\"1.0\"?>");
-            xml.AppendLine("<?mso-application progid=\"Excel.Sheet\"?>");
-            xml.AppendLine("<Workbook xmlns=\"urn:schemas-microsoft-com:office:spreadsheet\"");
-            xml.AppendLine(" xmlns:o=\"urn:schemas-microsoft-com:office:office\"");
-            xml.AppendLine(" xmlns:x=\"urn:schemas-microsoft-com:office:excel\"");
-            xml.AppendLine(" xmlns:ss=\"urn:schemas-microsoft-com:office:spreadsheet\"");
-            xml.AppendLine(" xmlns:html=\"http://www.w3.org/TR/REC-html40\">");
-            
-            // Document properties
-            xml.AppendLine(" <DocumentProperties xmlns=\"urn:schemas-microsoft-com:office:office\">");
-            xml.AppendLine("  <Title>APIView Report</Title>");
-            xml.AppendLine("  <Author>APIView Report Generator</Author>");
-            xml.AppendLine($"  <Created>{DateTime.Now:yyyy-MM-ddTHH:mm:ssZ}</Created>");
-            xml.AppendLine(" </DocumentProperties>");
-            
-            // Styles
-            xml.AppendLine(" <Styles>");
-            xml.AppendLine("  <Style ss:ID=\"HeaderStyle\">");
-            xml.AppendLine("   <Font ss:Bold=\"1\"/>");
-            xml.AppendLine("   <Interior ss:Color=\"#D3D3D3\" ss:Pattern=\"Solid\"/>");
-            xml.AppendLine("  </Style>");
-            xml.AppendLine("  <Style ss:ID=\"BooleanTrueStyle\">");
-            xml.AppendLine("   <Interior ss:Color=\"#90EE90\" ss:Pattern=\"Solid\"/>");
-            xml.AppendLine("  </Style>");
-            xml.AppendLine("  <Style ss:ID=\"BooleanFalseStyle\">");
-            xml.AppendLine("   <Interior ss:Color=\"#FFB6C1\" ss:Pattern=\"Solid\"/>");
-            xml.AppendLine("  </Style>");
-            xml.AppendLine(" </Styles>");
-            
-            // Worksheet
-            xml.AppendLine(" <Worksheet ss:Name=\"APIView Report\">");
-            xml.AppendLine("  <Table>");
-            
-            // Header row
-            xml.AppendLine("   <Row>");
-            xml.AppendLine("    <Cell ss:StyleID=\"HeaderStyle\"><Data ss:Type=\"String\">Review Id</Data></Cell>");
-            xml.AppendLine("    <Cell ss:StyleID=\"HeaderStyle\"><Data ss:Type=\"String\">Review Name</Data></Cell>");
-            xml.AppendLine("    <Cell ss:StyleID=\"HeaderStyle\"><Data ss:Type=\"String\">Is TypeSpec Base</Data></Cell>");
-            xml.AppendLine("   </Row>");
-            
-            // Data rows
-            foreach (var row in report.Row)
+            try
             {
-                var booleanStyle = row.IsTypeSpecBase ? "BooleanTrueStyle" : "BooleanFalseStyle";
-                var booleanValue = row.IsTypeSpecBase ? "Yes" : "No";
+                Console.WriteLine("Generating Excel XLSX report...");
+
+                // Simple tab-delimited format that Excel can open
+                var tsv = new StringBuilder();
                 
-                xml.AppendLine("   <Row>");
-                xml.AppendLine($"    <Cell><Data ss:Type=\"String\">{EscapeXml(row.RevisionId)}</Data></Cell>");
-                xml.AppendLine($"    <Cell><Data ss:Type=\"String\">{EscapeXml(row.ReviewName)}</Data></Cell>");
-                xml.AppendLine($"    <Cell ss:StyleID=\"{booleanStyle}\"><Data ss:Type=\"String\">{booleanValue}</Data></Cell>");
-                xml.AppendLine("   </Row>");
+                // Header row
+                tsv.AppendLine("Parser Version\tLanguage\tAPI Revision Id\tPackage Name\tPackage Version\tHandwritten Lines Count\tTotal Lines");
+                
+                // Data rows
+                foreach (var row in report.Row)
+                {
+                    tsv.AppendLine($"{EscapeTab(row.ParserVersion)}\t{EscapeTab(row.Language)}\t{EscapeTab(row.RevisionId)}\t{EscapeTab(row.PackageName)}\t{EscapeTab(row.PackageVersion)}\t{row.HandwrittenLines}\t{row.TotalLines}");
+                }
+                
+                var outputPath = Path.Combine("C:\\Repositories\\azure-sdk-tools\\src\\dotnet\\Report\\Result\\", $"APIView_Report_{DateTime.Now:yyyyMMdd_HHmmss}.txt");
+                await File.WriteAllTextAsync(outputPath, tsv.ToString());
+
+                Console.WriteLine($"Tab-delimited report saved to: {outputPath}");
+                Console.WriteLine("You can open this file in Excel or import it into Power BI.");
             }
-            
-            xml.AppendLine("  </Table>");
-            xml.AppendLine(" </Worksheet>");
-            xml.AppendLine("</Workbook>");
-            
-            return xml.ToString();
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error generating Excel report: {ex.Message}");
+            }
         }
 
-        private static string EscapeXml(string input)
+        private static string EscapeCsv(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+                return string.Empty;
+                
+            // If the value contains comma, quote, or newline, wrap it in quotes and escape internal quotes
+            if (input.Contains(',') || input.Contains('"') || input.Contains('\n') || input.Contains('\r'))
+            {
+                return $"\"{input.Replace("\"", "\"\"")}\"";
+            }
+            
+            return input;
+        }
+
+        private static string EscapeTab(string input)
         {
             if (string.IsNullOrEmpty(input))
                 return string.Empty;
                 
             return input
-                .Replace("&", "&amp;")
-                .Replace("<", "&lt;")
-                .Replace(">", "&gt;")
-                .Replace("\"", "&quot;")
-                .Replace("'", "&apos;");
+                .Replace("\t", " ")
+                .Replace("\n", " ")
+                .Replace("\r", " ");
         }
     }
 }
