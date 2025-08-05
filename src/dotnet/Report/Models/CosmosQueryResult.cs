@@ -7,8 +7,14 @@ namespace Report.Models
         [JsonPropertyName("Id")]
         public string Id { get; set; } = string.Empty;
 
+        [JsonPropertyName("LastUpdatedOn")]
+        public DateTime LastUpdatedOn { get; set; }
+
         [JsonPropertyName("Files")]
         public List<FileInfo> Files { get; set; } = new();
+
+        [JsonPropertyName("PackageName")]
+        public string PackageName { get; set; } = string.Empty;
     }
 
     public class FileInfo
@@ -24,5 +30,8 @@ namespace Report.Models
 
         [JsonPropertyName("Name")]
         public string? FileName { get; set; }
+
+        [JsonPropertyName("VersionString")]
+        public string? VersionString { get; set; }
     }
 }

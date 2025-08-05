@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="Helper\" />
-    <Folder Include="Result\" />
   </ItemGroup>
 
 </Project>

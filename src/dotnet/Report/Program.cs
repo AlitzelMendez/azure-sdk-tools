@@ -137,11 +137,10 @@ namespace Report
             var container = database.GetContainer("APIRevisions");
 
             var query = @"
-                SELECT 
-                    c.id as Id,
-                    c.Files
-                FROM c 
-                WHERE c.CreatedOn >= ""2025-07-01T00:00:00Z"" 
+                SELECT c.id as Id, c.Files, c.LastUpdatedOn, c.PackageName
+                 FROM c
+                 WHERE c.Language = ""Python""
+                 AND c.APIRevisionType =  ""Automatic""
                 ";
 
             var queryDefinition = new QueryDefinition(query);
@@ -157,7 +156,18 @@ namespace Report
                 Console.WriteLine($"Retrieved {response.Count} items from this page. Total RU consumed: {response.RequestCharge}");
             }
 
-            return results;
+            //Lets get the latest per package name 
+            List<CosmosQueryResult> latestResults = results
+                .GroupBy(r => r.PackageName)
+                .Select(g => g.OrderByDescending(r => r.LastUpdatedOn).First())
+                .ToList();
+
+            // I want to keep those that the files have at least one file where the VersionString is > 0.3.20
+            latestResults = latestResults
+                .Where(r => r.Files.Any(f => !string.IsNullOrEmpty(f.VersionString) && Version.TryParse(f.VersionString, out var version) && version >= new Version(0, 3, 20)))
+                .ToList();
+
+            return latestResults;
         }
 
         private static async Task<ApiViewDocument?> DownloadFileFromBlobAsync(string documentId, string fileId)
