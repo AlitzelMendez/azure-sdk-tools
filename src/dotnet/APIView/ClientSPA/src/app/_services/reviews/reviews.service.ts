@@ -164,7 +164,7 @@ export class ReviewsService {
       timestamp: new Date().toISOString()
     });
     
-    return this.http.get<boolean>(fullUrl).pipe(
+    return this.http.get<boolean>(fullUrl, { withCredentials: true }).pipe(
       map(result => {
         console.log('✅ API Response: getIsReviewByCopilotRequired', {
           result,
@@ -189,7 +189,7 @@ export class ReviewsService {
       timestamp: new Date().toISOString()
     });
     
-    return this.http.get<boolean>(url).pipe(
+    return this.http.get<boolean>(url, { withCredentials: true }).pipe(
       map(result => {
         console.log('✅ API Response: getIsReviewVersionReviewedByCopilot', {
           result,
