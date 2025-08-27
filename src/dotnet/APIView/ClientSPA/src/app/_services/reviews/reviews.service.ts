@@ -156,7 +156,24 @@ export class ReviewsService {
   getIsReviewByCopilotRequired(language?: string): Observable<boolean> {
     const url = `${this.baseUrl}/isReviewByCopilotRequired`;
     const params = language ? `?language=${encodeURIComponent(language)}` : '';
-    return this.http.get<boolean>(`${url}${params}`);
+    const fullUrl = `${url}${params}`;
+    
+    console.log('🌐 API Call: getIsReviewByCopilotRequired', {
+      url: fullUrl,
+      language,
+      timestamp: new Date().toISOString()
+    });
+    
+    return this.http.get<boolean>(fullUrl).pipe(
+      map(result => {
+        console.log('✅ API Response: getIsReviewByCopilotRequired', {
+          result,
+          language,
+          timestamp: new Date().toISOString()
+        });
+        return result;
+      })
+    );
   }
 
   getIsReviewVersionReviewedByCopilot(reviewId: string, packageVersion?: string): Observable<boolean> {
@@ -164,6 +181,24 @@ export class ReviewsService {
     if (packageVersion) {
       url += `?packageVersion=${encodeURIComponent(packageVersion)}`;
     }
-    return this.http.get<boolean>(url);
+    
+    console.log('🌐 API Call: getIsReviewVersionReviewedByCopilot', {
+      url,
+      reviewId,
+      packageVersion,
+      timestamp: new Date().toISOString()
+    });
+    
+    return this.http.get<boolean>(url).pipe(
+      map(result => {
+        console.log('✅ API Response: getIsReviewVersionReviewedByCopilot', {
+          result,
+          reviewId,
+          packageVersion,
+          timestamp: new Date().toISOString()
+        });
+        return result;
+      })
+    );
   }
 }

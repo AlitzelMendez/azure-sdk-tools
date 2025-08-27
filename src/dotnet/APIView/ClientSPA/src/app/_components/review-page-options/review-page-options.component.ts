@@ -142,20 +142,29 @@ export class ReviewPageOptionsComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
+    console.log('🔄 ngOnChanges triggered:', Object.keys(changes));
+    
     if (changes['diffStyleInput'] && changes['diffStyleInput'].currentValue != undefined) {
       this.setSelectedDiffStyle();
     }
 
     if (changes['userProfile'] && changes['userProfile'].currentValue != undefined) {
+      console.log('👤 User profile changed:', changes['userProfile'].currentValue?.userName);
       this.setSubscribeSwitch();
       this.setMarkedAsViewSwitch();
       this.setPageOptionValues();
     }
 
     if (changes['activeAPIRevision'] && changes['activeAPIRevision'].currentValue != undefined) {
+      console.log('📋 Active API revision changed:', {
+        id: changes['activeAPIRevision'].currentValue?.id,
+        packageVersion: changes['activeAPIRevision'].currentValue?.packageVersion,
+        language: changes['activeAPIRevision'].currentValue?.language
+      });
       this.setMarkedAsViewSwitch();
       this.selectedApprovers = this.activeAPIRevision!.assignedReviewers.map(reviewer => reviewer.assingedTo);
       this.isCopilotReviewSupported = this.isCopilotReviewSupportedForPackage();
+      console.log('🤖 Copilot review supported:', this.isCopilotReviewSupported);
       this.setAPIRevisionApprovalStates();
       this.setPullRequestsInfo();
       if (this.activeAPIRevision?.copilotReviewInProgress) {
@@ -315,10 +324,22 @@ export class ReviewPageOptionsComponent implements OnInit, OnChanges {
   }
 
   setAPIRevisionApprovalStates() {
+    console.log('🔄 setAPIRevisionApprovalStates called');
+    console.log('📋 Component State:', {
+      activeAPIRevision: this.activeAPIRevision,
+      reviewId: this.review?.id,
+      reviewLanguage: this.review?.language,
+      packageName: this.review?.packageName,
+      packageVersion: this.activeAPIRevision?.packageVersion,
+      diffAPIRevision: this.diffAPIRevision,
+      userProfile: this.userProfile?.userName
+    });
+
     const language = this.review?.language;
     const packageVersion = this.activeAPIRevision?.packageVersion;
     
     if (language) {
+      console.log('🚀 Making API calls for approval states...');
       const isRequired$ = this.reviewsService.getIsReviewByCopilotRequired(language);
       const isVersionReviewed$ = this.review?.id && packageVersion 
         ? this.reviewsService.getIsReviewVersionReviewedByCopilot(this.review.id, packageVersion)
@@ -326,21 +347,43 @@ export class ReviewPageOptionsComponent implements OnInit, OnChanges {
         
       combineLatest([isRequired$, isVersionReviewed$]).pipe(take(1)).subscribe({
         next: ([isRequired, isVersionReviewed]) => {
+          console.log('✅ API calls completed:', {
+            isReviewByCopilotRequired: isRequired,
+            isVersionReviewedByCopilot: isVersionReviewed,
+            timestamp: new Date().toISOString()
+          });
           this.updateApprovalStates(isRequired, isVersionReviewed);
         },
         error: (error) => {
+          console.error('❌ Error fetching copilot review states:', error);
           this.updateApprovalStates(false, false);
         }
       });
     } else {
+      console.log('⚠️ No language found, defaulting to false');
       this.updateApprovalStates(false, false);
     }
   }
 
   private updateApprovalStates(isReviewByCopilotRequired: boolean, isVersionReviewedByCopilot: boolean) {
+    console.log('🔧 updateApprovalStates called with:', {
+      isReviewByCopilotRequired,
+      isVersionReviewedByCopilot
+    });
+
     this.activeAPIRevisionIsApprovedByCurrentUser = this.activeAPIRevision?.approvers.includes(this.userProfile?.userName!)!;
     this.canToggleApproveAPIRevision = (!this.diffAPIRevision || this.diffAPIRevision.approvers.length > 0);
     this.isAPIRevisionApprovalDisabled = this.shouldDisableApproval(isReviewByCopilotRequired, isVersionReviewedByCopilot);
+    
+    console.log('🎯 Calculated approval states:', {
+      activeAPIRevisionIsApprovedByCurrentUser: this.activeAPIRevisionIsApprovedByCurrentUser,
+      canToggleApproveAPIRevision: this.canToggleApproveAPIRevision,
+      isAPIRevisionApprovalDisabled: this.isAPIRevisionApprovalDisabled,
+      approvers: this.activeAPIRevision?.approvers,
+      userName: this.userProfile?.userName,
+      diffAPIRevision: !!this.diffAPIRevision,
+      diffRevisionApprovers: this.diffAPIRevision?.approvers?.length
+    });
     
     if (this.canToggleApproveAPIRevision) {
       if (this.isAPIRevisionApprovalDisabled) {
@@ -356,6 +399,18 @@ export class ReviewPageOptionsComponent implements OnInit, OnChanges {
       this.apiRevisionApprovalBtnClass = "btn btn-outline-secondary";
       this.apiRevisionApprovalBtnLabel = (this.activeAPIRevisionIsApprovedByCurrentUser) ? "Revert API Approval" : "Approve";
     }
+
+    // 🎯 FINAL SUMMARY LOG
+    console.log('🎯 FINAL APPROVAL BUTTON STATE:', {
+      btnClass: this.apiRevisionApprovalBtnClass,
+      btnLabel: this.apiRevisionApprovalBtnLabel,
+      btnMessage: this.apiRevisionApprovalMessage,
+      isDisabled: this.isAPIRevisionApprovalDisabled,
+      canToggle: this.canToggleApproveAPIRevision,
+      isApprovedByUser: this.activeAPIRevisionIsApprovedByCurrentUser,
+      timestamp: new Date().toISOString()
+    });
+    console.log('===============================================');
   }
 
   setReviewApprovalStatus() {
@@ -478,13 +533,25 @@ export class ReviewPageOptionsComponent implements OnInit, OnChanges {
   }
 
   handleAPIRevisionApprovalAction() {
+    console.log('🔘 handleAPIRevisionApprovalAction called');
+    console.log('🔍 Approval action state check:', {
+      isAPIRevisionApprovalDisabled: this.isAPIRevisionApprovalDisabled,
+      activeAPIRevisionIsApprovedByCurrentUser: this.activeAPIRevisionIsApprovedByCurrentUser,
+      hasActiveConversation: this.hasActiveConversation,
+      hasFatalDiagnostics: this.hasFatalDiagnostics,
+      canToggleApproveAPIRevision: this.canToggleApproveAPIRevision
+    });
+    
     if (this.isAPIRevisionApprovalDisabled) {
+      console.log('🚫 Approval action blocked: API revision approval is disabled');
       return;
     }
     
     if (!this.activeAPIRevisionIsApprovedByCurrentUser && (this.hasActiveConversation || this.hasFatalDiagnostics)) {
+      console.log('⚠️ Showing approval modal due to active conversation or fatal diagnostics');
       this.showAPIRevisionApprovalModal = true;
     } else {
+      console.log('✅ Proceeding with approval toggle');
       this.toggleAPIRevisionApproval();
     }
   }
@@ -564,34 +631,85 @@ export class ReviewPageOptionsComponent implements OnInit, OnChanges {
   }
 
   private isPreviewVersion(): boolean {
-    if (!this.activeAPIRevision) return false;
+    console.log('🔍 isPreviewVersion called');
+    
+    if (!this.activeAPIRevision) {
+      console.log('⚠️ No activeAPIRevision, returning false');
+      return false;
+    }
     
     try {
-      return new AzureEngSemanticVersion(
+      const version = new AzureEngSemanticVersion(
         this.activeAPIRevision.packageVersion, 
         this.activeAPIRevision.language
-      ).isPrerelease;
-    } catch {
+      );
+      console.log('📦 Version analysis:', {
+        packageVersion: this.activeAPIRevision.packageVersion,
+        language: this.activeAPIRevision.language,
+        isPrerelease: version.isPrerelease,
+        versionType: version.versionType || 'Unknown'
+      });
+      return version.isPrerelease;
+    } catch (error) {
+      console.log('❌ Error parsing version:', error);
       return false;
     }
   }
 
   private shouldDisableApproval(isReviewByCopilotRequired: boolean, isVersionReviewedByCopilot: boolean): boolean {
-    if (!this.isCopilotReviewSupported) return false;
-    if (this.isPreviewVersion()) return false;
-    if (this.activeAPIRevisionIsApprovedByCurrentUser) return false;
+    console.log('🤔 shouldDisableApproval called with:', {
+      isReviewByCopilotRequired,
+      isVersionReviewedByCopilot
+    });
+
+    console.log('🔍 Evaluating conditions:');
+    console.log('  isCopilotReviewSupported:', this.isCopilotReviewSupported);
+    console.log('  isPreviewVersion():', this.isPreviewVersion());
+    console.log('  activeAPIRevisionIsApprovedByCurrentUser:', this.activeAPIRevisionIsApprovedByCurrentUser);
+    console.log('  packageName:', this.review?.packageName);
+    console.log('  language:', this.review?.language);
+    console.log('  packageVersion:', this.activeAPIRevision?.packageVersion);
+
+    if (!this.isCopilotReviewSupported) {
+      console.log('✅ NOT disabling approval: Copilot review not supported for this package');
+      return false;
+    }
+    if (this.isPreviewVersion()) {
+      console.log('✅ NOT disabling approval: Preview version');
+      return false;
+    }
+    if (this.activeAPIRevisionIsApprovedByCurrentUser) {
+      console.log('✅ NOT disabling approval: Already approved by current user');
+      return false;
+    }
     
-    return isReviewByCopilotRequired && !isVersionReviewedByCopilot;
+    const shouldDisable = isReviewByCopilotRequired && !isVersionReviewedByCopilot;
+    console.log(`${shouldDisable ? '❌' : '✅'} ${shouldDisable ? 'DISABLING' : 'NOT disabling'} approval: isRequired=${isReviewByCopilotRequired}, isReviewed=${isVersionReviewedByCopilot}`);
+    
+    return shouldDisable;
   }
 
   private isCopilotReviewSupportedForPackage(): boolean {
+    console.log('🔎 isCopilotReviewSupportedForPackage called');
+    
     if (!this.review?.packageName || !this.review?.language) {
+      console.log('✅ Copilot review supported: No package name or language');
       return true;
     }
 
     const isAzureRestPackage = this.review.packageName.startsWith("@azure-rest");
     const isJavaScript = this.review.language == "JavaScript";
+    const isSupported = !(isAzureRestPackage && isJavaScript);
     
-    return !(isAzureRestPackage && isJavaScript);
+    console.log('🔍 Package support evaluation:', {
+      packageName: this.review.packageName,
+      language: this.review.language,
+      isAzureRestPackage,
+      isJavaScript,
+      isSupported,
+      reason: isSupported ? 'Supported' : 'Not supported (@azure-rest + JavaScript)'
+    });
+    
+    return isSupported;
   }
 }
