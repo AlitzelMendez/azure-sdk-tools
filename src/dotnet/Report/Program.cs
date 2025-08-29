@@ -21,11 +21,7 @@ namespace Report
 
             try
             {
-                // Initialize configuration
-                InitializeConfiguration();
-
-                // Initialize Azure clients
-                InitializeAzureClients();
+           
 
                 // Query CosmosDB
                 var queryResults = await QueryCosmosDBAsync();
@@ -58,21 +54,7 @@ namespace Report
                         var result = await DownloadFileFromBlobAsync(document.Id, latestFile.FileId);
                         if (result != null)
                         {
-                            apiViewDocuments.Add(result);
-                            var linesAnalysis = IdentifyHandwrittenLines.GetLinesAnalysis(result);
-                            reportResult.Row.Add(new RowReport()
-                            {
-                                PackageName = result.PackageName,
-                                RevisionId = document.Id,
-                                TotalLines = linesAnalysis.TotalLines,
-                                HandwrittenLines = linesAnalysis.HandwrittenLines,
-                                Language = result.Language,
-                                PackageVersion = result.PackageVersion,
-                                ParserVersion = result.ParserVersion,
-                                CreatedOn = latestFile.CreationDate,
-
-                            });
-                            Console.WriteLine($"File {latestFile.FileId} downloaded and parsed successfully.");
+                            //let's review if it has dups 
                         }
                         else
                         {
@@ -86,15 +68,6 @@ namespace Report
                 }
 
                 Console.WriteLine("File download process completed.");
-                //NOW LETS PROCESS THE DATA! LET'S CREATE THE REPORT
-                
-                // Generate CSV report (best for Power BI)
-                await GenerateCsvReportAsync(reportResult);
-                
-                // Also generate Excel XLSX if needed
-             //   await GenerateExcelReportAsync(reportResult);
-                
-                Console.WriteLine($"Report generated with {reportResult.Row.Count} rows.");
 
             }
             catch (Exception ex)
@@ -104,29 +77,17 @@ namespace Report
             }
         }
 
-        private static void InitializeConfiguration()
+        public bool AreLineIdsDuplicate(CodeFile codeFile, out string duplicateLineId)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(Directory.GetCurrentDirectory())
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
-                .AddEnvironmentVariables();
+            List<string> duplicateLineIds = codeFile.GetApiLines(skipDocs: true)
+                .Where(line => !string.IsNullOrEmpty(line.lineId))
+                .GroupBy(line => line.lineId)
+                .Where(group => group.Count() > 1)
+                .Select(group => group.Key)
+                .ToList();
 
-            _configuration = builder.Build();
-        }
-
-        private static void InitializeAzureClients()
-        {
-            var credential = new DefaultAzureCredential();
-
-            // Initialize Cosmos client
-            var cosmosEndpoint = _configuration!["CosmosEndpoint"];
-            _cosmosClient = new CosmosClient(cosmosEndpoint, credential);
-
-            // Initialize Blob service client
-            var storageAccountUrl = _configuration["StorageAccountUrl"];
-            _blobServiceClient = new BlobServiceClient(new Uri(storageAccountUrl!), credential);
-
-            Console.WriteLine("Azure clients initialized successfully.");
+            duplicateLineId = string.Join(", ", duplicateLineIds);
+            return duplicateLineIds.Count > 0;
         }
 
         private static async Task<List<CosmosQueryResult>> QueryCosmosDBAsync()
@@ -137,10 +98,9 @@ namespace Report
             var container = database.GetContainer("APIRevisions");
 
             var query = @"
-                SELECT c.id as Id, c.Files, c.LastUpdatedOn, c.PackageName
+                SELECT c.id as Id, c.Files, c.LastUpdatedOn, c.PackageName, c.Language
                  FROM c
-                 WHERE c.Language = ""Python""
-                 AND c.APIRevisionType =  ""Automatic""
+                 WHERE  c.CreatedOn > ""2025-07-15T02:08:55.6042947Z""
                 ";
 
             var queryDefinition = new QueryDefinition(query);
@@ -152,20 +112,21 @@ namespace Report
             {
                 var response = await queryIterator.ReadNextAsync();
                 results.AddRange(response);
-                
+
                 Console.WriteLine($"Retrieved {response.Count} items from this page. Total RU consumed: {response.RequestCharge}");
             }
 
-            //Lets get the latest per package name 
+            // Get the last 10 revisions per language per package name
             List<CosmosQueryResult> latestResults = results
-                .GroupBy(r => r.PackageName)
-                .Select(g => g.OrderByDescending(r => r.LastUpdatedOn).First())
+                .Where(r => !string.IsNullOrEmpty(r.PackageName)) // Ensure package name is not null/empty
+                .GroupBy(r => new { r.Language, r.PackageName }) // Group by language and package name
+                .SelectMany(g => g.OrderByDescending(r => r.LastUpdatedOn).Take(10)) // Take top 10 per group
+                .OrderBy(r => r.PackageName)
+                .ThenByDescending(r => r.LastUpdatedOn)
                 .ToList();
 
-            // I want to keep those that the files have at least one file where the VersionString is > 0.3.20
-            latestResults = latestResults
-                .Where(r => r.Files.Any(f => !string.IsNullOrEmpty(f.VersionString) && Version.TryParse(f.VersionString, out var version) && version >= new Version(0, 3, 20)))
-                .ToList();
+            Console.WriteLine($"Found {latestResults.Count} revisions across {latestResults.GroupBy(r => r.PackageName).Count()} packages.");
+
 
             return latestResults;
         }
@@ -214,6 +175,33 @@ namespace Report
 
             return null;
         }
+
+        private static void InitializeConfiguration()
+        {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(Directory.GetCurrentDirectory())
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddEnvironmentVariables();
+
+            _configuration = builder.Build();
+        }
+
+        private static void InitializeAzureClients()
+        {
+            var credential = new DefaultAzureCredential();
+
+            // Initialize Cosmos client
+            var cosmosEndpoint = _configuration!["CosmosEndpoint"];
+            _cosmosClient = new CosmosClient(cosmosEndpoint, credential);
+
+            // Initialize Blob service client
+            var storageAccountUrl = _configuration["StorageAccountUrl"];
+            _blobServiceClient = new BlobServiceClient(new Uri(storageAccountUrl!), credential);
+
+            Console.WriteLine("Azure clients initialized successfully.");
+        }
+
+
 
         private static async Task<ApiViewDocument?> ParseApiViewDocumentAsync(string jsonContent, string documentId, string fileId)
         {

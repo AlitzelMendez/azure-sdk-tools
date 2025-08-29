@@ -15,6 +15,9 @@ namespace Report.Models
 
         [JsonPropertyName("PackageName")]
         public string PackageName { get; set; } = string.Empty;
+
+        [JsonPropertyName("Language")]
+        public string Language { get; set; } = string.Empty;
     }
 
     public class FileInfo

@@ -177,6 +177,60 @@ namespace APIViewWeb.Controllers
             return StatusCode(statusCode: StatusCodes.Status500InternalServerError);
         }
 
+        [TypeFilter(typeof(ApiKeyAuthorizeAsyncFilter))]
+        [HttpPost]
+        public async Task<ActionResult> CheckDuplicateLineIds([FromForm] IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No file provided.");
+            }
+
+            try
+            {
+                using var stream = file.OpenReadStream();
+                using var memoryStream = new MemoryStream();
+                
+                var codeFile = await _codeFileManager.CreateCodeFileAsync(
+                    originalName: file.FileName,
+                    fileStream: stream,
+                    runAnalysis: false,
+                    memoryStream: memoryStream);
+
+                var hasDuplicates = AreLineIdsDuplicate(codeFile, out string duplicateLineId);
+
+                return Ok(new {
+                    fileName = file.FileName,
+                    packageName = codeFile.PackageName,
+                    language = codeFile.Language,
+                    hasDuplicateLineIds = hasDuplicates,
+                    duplicateLineIds = duplicateLineId,
+                    totalLines = codeFile.GetApiLines(skipDocs: true).Count(),
+                    linesWithIds = codeFile.GetApiLines(skipDocs: true).Count(line => !string.IsNullOrEmpty(line.lineId))
+                });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new { 
+                    error = ex.Message,
+                    stackTrace = ex.StackTrace 
+                });
+            }
+        }
+
+        public bool AreLineIdsDuplicate(CodeFile codeFile, out string duplicateLineId)
+        {
+            List<string> duplicateLineIds = codeFile.GetApiLines(skipDocs: true)
+                .Where(line => !string.IsNullOrEmpty(line.lineId))
+                .GroupBy(line => line.lineId)
+                .Where(group => group.Count() > 1)
+                .Select(group => group.Key)
+                .ToList();
+
+            duplicateLineId = string.Join(", ", duplicateLineIds);
+            return duplicateLineIds.Count > 0;
+        }
+
         private async Task<(ReviewListItemModel review, APIRevisionListItemModel apiRevision)> CreateAutomaticRevisionAsync(CodeFile codeFile, string label, string originalName, MemoryStream memoryStream, bool compareAllRevisions = false)
         {
             var createNewRevision = true;
