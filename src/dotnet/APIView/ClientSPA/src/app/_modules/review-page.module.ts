@@ -7,8 +7,10 @@ import { CodePanelComponent } from 'src/app/_components/code-panel/code-panel.co
 import { DialogModule } from 'primeng/dialog';
 import { TreeSelectModule } from 'primeng/treeselect';
 import { ButtonModule } from 'primeng/button';
+import { TooltipModule } from 'primeng/tooltip';
 import { UiScrollModule  } from 'ngx-ui-scroll' ;
 import { ReviewPageOptionsComponent } from 'src/app/_components/review-page-options/review-page-options.component';
+import { APIViewAgentComponent } from 'src/app/_components/apiview-agent/apiview-agent.component';
 import { ReviewPageLayoutModule } from './shared/review-page-layout.module';
 
 const routes: Routes = [
@@ -21,12 +23,14 @@ const routes: Routes = [
     ReviewNavComponent,
     CodePanelComponent,
     ReviewPageOptionsComponent,
+    APIViewAgentComponent,
   ],
   imports: [
     CommonModule,
     DialogModule,
     TreeSelectModule,
     ButtonModule,
+    TooltipModule,
     UiScrollModule,
     ReviewPageLayoutModule,
     RouterModule.forChild(routes),

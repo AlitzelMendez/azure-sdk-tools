@@ -1,0 +1,277 @@
+<div class="apiview-agent-container h-100 d-flex flex-column">
+  <!-- Header -->
+  <div class="agent-header d-flex align-items-center justify-content-between p-3 border-bottom">
+    <div class="d-flex align-items-center">
+      <div class="agent-icon me-3">
+        <i class="bi bi-robot"></i>
+      </div>
+      <div>
+        <h5 class="mb-0 fw-bold">API View Agent</h5>
+        <small class="text-muted">AI-Powered Assistant</small>
+      </div>
+    </div>
+    <button type="button" class="btn btn-sm btn-outline-secondary" (click)="closeAgent()" 
+            pTooltip="Close Agent" tooltipPosition="left">
+      <i class="bi bi-x-lg"></i>
+    </button>
+  </div>
+
+  <!-- Agent Feature Tabs -->
+  <div class="agent-tabs border-bottom">
+    <nav class="nav nav-tabs border-0">
+      <button class="nav-link" [class.active]="activeTab === 'summary'" type="button" (click)="setActiveTab('summary')">
+        <i class="bi bi-file-text me-2"></i>Summary
+      </button>
+      <button class="nav-link disabled" type="button" disabled pTooltip="Coming Soon" tooltipPosition="top">
+        <i class="bi bi-search me-2"></i>Analysis
+      </button>
+      <button class="nav-link disabled" type="button" disabled pTooltip="Coming Soon" tooltipPosition="top">
+        <i class="bi bi-chat-dots me-2"></i>Chat
+      </button>
+    </nav>
+  </div>
+
+  <!-- Tab Content -->
+  <div class="tab-content flex-grow-1">
+    
+    <!-- Summary Tab -->
+    <div class="tab-pane h-100" [class.active]="activeTab === 'summary'" *ngIf="activeTab === 'summary'">
+      
+      <!-- Show Generated Summary if available -->
+      <div class="summary-result-container d-flex h-100" *ngIf="generatedSummary && !isGeneratingSummary">
+        <!-- Main Summary Content -->
+        <div class="summary-main flex-grow-1 p-4 overflow-auto">
+          <div class="summary-header d-flex justify-content-between align-items-center mb-4">
+            <h6 class="mb-0 fw-semibold">
+              <i class="bi bi-file-text me-2"></i>
+              API Summary
+            </h6>
+            <div class="summary-actions">
+              <button type="button" class="btn btn-sm btn-outline-secondary me-2"
+                      pTooltip="Copy summary to clipboard" tooltipPosition="top">
+                <i class="bi bi-clipboard"></i>
+              </button>
+              <button type="button" class="btn btn-sm btn-outline-danger" (click)="clearSummary()"
+                      pTooltip="Start over with new configuration" tooltipPosition="top">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </div>
+          
+          <div class="summary-content">
+            <div class="summary-meta mb-3">
+              <small class="text-muted">
+                <i class="bi bi-clock me-1"></i>Generated Sep 2, 2025 at 2:30 PM
+                <span class="mx-2">•</span>
+                <i class="bi bi-tag me-1"></i>API Content
+                <span class="mx-2">•</span>
+                <i class="bi bi-text-paragraph me-1"></i>Concise
+              </small>
+            </div>
+            
+            <!-- API Summary Content -->
+            <div class="summary-text p-4 bg-light border rounded">
+              <div class="summary-section mb-4">
+                <h6 class="fw-bold text-primary mb-3">
+                  <i class="bi bi-bullseye me-2"></i>Purpose
+                </h6>
+                <p class="mb-0">
+                  This API provides a service for managing generic resources, allowing clients to provision new resources, retrieve their data, and remove them. It is oriented around interacting with a configured service endpoint, optionally using API key authentication.
+                </p>
+              </div>
+              
+              <div class="summary-section mb-4">
+                <h6 class="fw-bold text-warning mb-3">
+                  <i class="bi bi-code-slash me-2"></i>API Version
+                </h6>
+                <p class="mb-0">
+                  No explicit API version object is defined; a latest version is not specified.
+                </p>
+              </div>
+              
+              <div class="summary-section mb-4">
+                <h6 class="fw-bold text-success mb-3">
+                  <i class="bi bi-diagram-3 me-2"></i>Client Classes
+                </h6>
+                <p class="mb-0">
+                  This API exposes a single synchronous <code class="text-primary">apiview_demo.DemoClient</code> for managing resources. There is no separate asynchronous client; all functionality is accessed through this one client.
+                </p>
+              </div>
+              
+              <div class="summary-section">
+                <h6 class="fw-bold text-info mb-3">
+                  <i class="bi bi-gear me-2"></i>Functional Overview
+                </h6>
+                <p class="mb-0">
+                  The <code class="text-primary">apiview_demo.DemoClient</code> supports resource management with CRUD-like capabilities focused on Create, Read, and Delete. It enables creating resources with optional properties, retrieving resource data by identifier, and deleting resources by identifier. The client is initialized to target a specific service endpoint and can operate with optional API key-based access control.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Elegant Quick Actions Sidebar -->
+        <div class="quick-actions-sidebar border-start bg-light">
+          <div class="sidebar-header p-3 border-bottom">
+            <h6 class="mb-0 fw-semibold text-center">
+              <i class="bi bi-lightning me-2"></i>Quick Actions
+            </h6>
+          </div>
+          
+          <div class="sidebar-content p-3">
+            <!-- Content Type Toggle -->
+            <div class="action-group mb-4">
+              <label class="form-label fw-medium mb-2">
+                <i class="bi bi-collection me-1"></i>Content
+              </label>
+              <div class="toggle-group">
+                <input type="radio" class="btn-check" name="quickSummaryType" id="quickApiContent" [value]="'apiContent'" [(ngModel)]="newSummaryType">
+                <label class="toggle-option" for="quickApiContent" pTooltip="API Changes" tooltipPosition="left">
+                  <i class="bi bi-code-square"></i>
+                </label>
+                
+                <input type="radio" class="btn-check" name="quickSummaryType" id="quickComments" [value]="'comments'" [(ngModel)]="newSummaryType">
+                <label class="toggle-option" for="quickComments" pTooltip="Review Comments" tooltipPosition="left">
+                  <i class="bi bi-chat-left-text"></i>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Detail Level Toggle -->
+            <div class="action-group mb-4">
+              <label class="form-label fw-medium mb-2">
+                <i class="bi bi-sliders me-1"></i>Detail
+              </label>
+              <div class="toggle-group">
+                <input type="radio" class="btn-check" name="quickSummaryStyle" id="quickConcise" [value]="'concise'" [(ngModel)]="newSummaryStyle">
+                <label class="toggle-option" for="quickConcise" pTooltip="Concise" tooltipPosition="left">
+                  <i class="bi bi-list-ul"></i>
+                </label>
+                
+                <input type="radio" class="btn-check" name="quickSummaryStyle" id="quickVerbose" [value]="'verbose'" [(ngModel)]="newSummaryStyle">
+                <label class="toggle-option" for="quickVerbose" pTooltip="Verbose" tooltipPosition="left">
+                  <i class="bi bi-justify"></i>
+                </label>
+              </div>
+            </div>
+            
+            <!-- Generate Button -->
+            <div class="action-group">
+              <button type="button" class="btn btn-primary w-100 btn-sm" (click)="generateAdditionalSummary()"
+                      pTooltip="Generate new summary with selected options" tooltipPosition="left">
+                <i class="bi bi-stars me-2"></i>Generate
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Welcome Message with Configuration (when no summary) -->
+      <div class="welcome-container flex-grow-1 p-4 d-flex align-items-center justify-content-center" *ngIf="!generatedSummary && !isGeneratingSummary">
+        <div class="welcome-content text-center" style="max-width: 500px;">
+          <!-- Welcome Header -->
+          <div class="welcome-header mb-4">
+            <div class="welcome-icon mb-3">
+              <i class="bi bi-robot display-3 text-primary"></i>
+            </div>
+            <h4 class="fw-bold mb-2">Welcome to API View Agent</h4>
+            <p class="text-muted mb-4 lead">
+              Generate AI-powered summaries of your API content or comments.<br>
+              Configure your preferences below and get started.
+            </p>
+          </div>
+
+          <!-- Configuration Cards -->
+          <div class="configuration-section mb-4">
+            <!-- Summary Type -->
+            <div class="config-group mb-4">
+              <h6 class="fw-semibold mb-3 text-start">What would you like to summarize?</h6>
+              <div class="row g-3">
+                <div class="col-6">
+                  <input type="radio" class="btn-check" name="summaryType" id="apiContent" [value]="'apiContent'" [(ngModel)]="selectedSummaryType">
+                  <label class="summary-option-card w-100 h-100 d-flex flex-column align-items-center justify-content-center p-4" for="apiContent">
+                    <i class="bi bi-code-square display-6 mb-2 card-icon"></i>
+                    <strong class="mb-1 card-title">API Changes</strong>
+                    <small class="text-center card-description">Summarize API methods, classes, and structural changes</small>
+                  </label>
+                </div>
+                <div class="col-6">
+                  <input type="radio" class="btn-check" name="summaryType" id="comments" [value]="'comments'" [(ngModel)]="selectedSummaryType">
+                  <label class="summary-option-card w-100 h-100 d-flex flex-column align-items-center justify-content-center p-4" for="comments">
+                    <i class="bi bi-chat-left-text display-6 mb-2 card-icon"></i>
+                    <strong class="mb-1 card-title">Review Comments</strong>
+                    <small class="text-center card-description">Summarize feedback, discussions, and review notes</small>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <!-- Summary Style -->
+            <div class="config-group mb-4">
+              <h6 class="fw-semibold mb-3 text-start">How detailed should the summary be?</h6>
+              <div class="row g-3">
+                <div class="col-6">
+                  <input type="radio" class="btn-check" name="summaryStyle" id="concise" [value]="'concise'" [(ngModel)]="selectedSummaryStyle">
+                  <label class="summary-style-card w-100 d-flex align-items-center p-3" for="concise">
+                    <i class="bi bi-list-ul fs-4 me-3 style-icon"></i>
+                    <div class="text-start">
+                      <strong class="d-block style-title">Concise</strong>
+                      <small class="style-description">Quick bullet points and key highlights</small>
+                    </div>
+                  </label>
+                </div>
+                <div class="col-6">
+                  <input type="radio" class="btn-check" name="summaryStyle" id="verbose" [value]="'verbose'" [(ngModel)]="selectedSummaryStyle">
+                  <label class="summary-style-card w-100 d-flex align-items-center p-3" for="verbose">
+                    <i class="bi bi-justify fs-4 me-3 style-icon"></i>
+                    <div class="text-start">
+                      <strong class="d-block style-title">Verbose</strong>
+                      <small class="style-description">Detailed analysis and comprehensive insights</small>
+                    </div>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Generate Button -->
+          <div class="generate-section">
+            <button type="button" 
+                    class="btn btn-primary btn-lg px-5 py-3"
+                    [disabled]="!review || !activeAPIRevision"
+                    (click)="generateSummary()"
+                    pTooltip="Generate AI summary based on your selections" 
+                    tooltipPosition="top">
+              <i class="bi bi-stars me-2"></i>
+              Generate Summary
+            </button>
+            
+            <div class="mt-3" *ngIf="review && activeAPIRevision">
+              <small class="text-muted">
+                <i class="bi bi-info-circle me-1"></i>
+                Ready to analyze <strong>{{ review.packageName }}</strong> v{{ activeAPIRevision.packageVersion }}
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Loading State -->
+      <div class="loading-container flex-grow-1 d-flex align-items-center justify-content-center" *ngIf="isGeneratingSummary">
+        <div class="text-center">
+          <div class="loading-spinner mb-4">
+            <div class="spinner-border text-primary" style="width: 4rem; height: 4rem;" role="status">
+              <span class="visually-hidden">Generating...</span>
+            </div>
+          </div>
+          <h5 class="fw-semibold mb-2">Generating Your Summary</h5>
+          <p class="text-muted mb-0">
+            AI is analyzing your {{ selectedSummaryType === 'apiContent' ? 'API changes' : 'review comments' }}...
+          </p>
+          <small class="text-muted">This may take a few moments</small>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

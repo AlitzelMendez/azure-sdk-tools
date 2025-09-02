@@ -101,6 +101,16 @@
         (numberOfActiveThreadsEmitter)="handleNumberOfActiveThreadsEmitter($event)">
     </app-conversations >
 </p-sidebar>
+<p-sidebar *ngIf="getLoadingStatus() === 'completed'" [(visible)]="apiViewAgentSidePanel!" position="right" [modal]="true" [showCloseIcon]="false" styleClass="apiview-agent-sidebar">
+    <app-apiview-agent
+        [review]="review"
+        [activeAPIRevision]="activeAPIRevision"
+        [userProfile]="userProfile"
+        [preferredApprovers]="preferredApprovers"
+        (requestReviewEmitter)="handleAPIViewAgentRequestReview($event)"
+        (closeAgentEmitter)="handleAPIViewAgentClose($event)">
+    </app-apiview-agent>
+</p-sidebar>
 <p-sidebar *ngIf="getLoadingStatus() === 'completed' && crossLanguageAPIRevisions.length > 0" [(visible)]="crosslanguageRevisionSidePanel!" position="right" [modal]="true" [showCloseIcon]="false" styleClass="cross-language-revisions-sidebar">
     <ng-template pTemplate="header">
         <div class="flex align-items-center gap-2">

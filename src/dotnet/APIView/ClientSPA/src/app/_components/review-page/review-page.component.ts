@@ -51,6 +51,7 @@ export class ReviewPageComponent implements OnInit {
   revisionSidePanel : boolean | undefined = undefined;
   crosslanguageRevisionSidePanel : boolean | undefined = undefined; 
   conversationSidePanel : boolean | undefined = undefined;
+  apiViewAgentSidePanel : boolean | undefined = undefined;
   reviewPageNavigation : TreeNode[] = [];
   language: string | undefined;
   languageSafeName: string | undefined;
@@ -177,6 +178,15 @@ export class ReviewPageComponent implements OnInit {
             this.router.navigate([`/samples/${this.reviewId}`])
           }
         }
+      },
+      {
+        icon: 'bi bi-robot',
+        tooltip: 'API View Agent',
+        command: () => { 
+            if (this.getLoadingStatus() === 'completed') {
+              this.apiViewAgentSidePanel = !this.apiViewAgentSidePanel;
+            }
+          }
       }
     ]);
     this.sideMenu = menu;
@@ -594,6 +604,20 @@ export class ReviewPageComponent implements OnInit {
     setTimeout(() => {
       this.codeLineSearchInfo = (value) ? new CodeLineSearchInfo(value.currentMatch, value.totalMatchCount) : undefined;
     }, 0);
+  }
+
+  handleAPIViewAgentRequestReview(event: boolean) {
+    // This will call the existing generateAIReview functionality
+    // You could extend this to call the new summary endpoint mentioned in the issue
+    if (this.activeAPIRevision) {
+      // For now, we'll simulate the behavior - in a real implementation
+      // this would call the new summarization endpoint
+      console.log('API View Agent requested review for revision:', this.activeAPIRevision.id);
+    }
+  }
+
+  handleAPIViewAgentClose(event: boolean) {
+    this.apiViewAgentSidePanel = false;
   }
 
   handleNumberOfActiveThreadsEmitter(value: number) {
