@@ -55,7 +55,7 @@ namespace APIViewWeb.Controllers
                     var codeFile = await _codeFileManager.CreateCodeFileAsync(originalName: file.FileName, fileStream: openReadStream,
                         runAnalysis: false, memoryStream: memoryStream);
 
-                    (ReviewListItemModel review, APIRevisionListItemModel apiRevision) = await CreateAutomaticRevisionAsync(codeFile: codeFile, label: label, originalName: file.FileName, memoryStream: memoryStream, packageType: packageType, compareAllRevisions: compareAllRevisions);
+                    (ReviewListItemModel review, APIRevisionListItemModel apiRevision) = await CreateAutomaticRevisionAsync(codeFile: codeFile, label: label, originalName: file.FileName, memoryStream: memoryStream, compareAllRevisions: compareAllRevisions);
                     if (apiRevision != null)
                     {
                         apiRevision = await _apiRevisionsManager.UpdateRevisionMetadataAsync(apiRevision, packageVersion ?? codeFile.PackageVersion, label, setReleaseTag);
@@ -187,7 +187,7 @@ namespace APIViewWeb.Controllers
                     return StatusCode(statusCode: StatusCodes.Status204NoContent, $"API review code file for package {packageName} is not found in DevOps pipeline artifacts.");
                 }
 
-                (ReviewListItemModel review, APIRevisionListItemModel apiRevision) = await CreateAutomaticRevisionAsync(codeFile: codeFile, label: label, originalName: originalFilePath, memoryStream: memoryStream, packageType: packageType, compareAllRevisions: compareAllRevisions);
+                (ReviewListItemModel review, APIRevisionListItemModel apiRevision) = await CreateAutomaticRevisionAsync(codeFile: codeFile, label: label, originalName: originalFilePath, memoryStream: memoryStream, compareAllRevisions: compareAllRevisions);
                 if (apiRevision == null)
                 {
                     return StatusCode(statusCode: StatusCodes.Status500InternalServerError, "API revision creation returned null. This may indicate an issue with the code file parsing or revision creation process.");
@@ -284,7 +284,6 @@ namespace APIViewWeb.Controllers
         private async Task<(ReviewListItemModel review, APIRevisionListItemModel apiRevision)> CreateAutomaticRevisionAsync(CodeFile codeFile, string label, string originalName, MemoryStream memoryStream, bool compareAllRevisions = false)
         {
             // Parse package type once at the beginning
-            var parsedPackageType = !string.IsNullOrEmpty(packageType) && Enum.TryParse<PackageType>(packageType, true, out var result) ? (PackageType?)result : null;
             
             var createNewRevision = true;
             var review = await _reviewManager.GetReviewAsync(packageName: codeFile.PackageName, language: codeFile.Language, isClosed: null);
@@ -295,11 +294,7 @@ namespace APIViewWeb.Controllers
             if (review != null)
             {
                 // Update package type if provided from controller parameter and not already set
-                if (parsedPackageType.HasValue && !review.PackageType.HasValue)
-                {
-                    review.PackageType = parsedPackageType;
-                    review = await _reviewManager.UpdateReviewAsync(review);
-                }
+               
 
                 apiRevisions = await _apiRevisionsManager.GetAPIRevisionsAsync(review.Id);
                 if (apiRevisions.Any())
@@ -353,7 +348,7 @@ namespace APIViewWeb.Controllers
             }
             else
             {
-                review = await _reviewManager.CreateReviewAsync(packageName: codeFile.PackageName, language: codeFile.Language, isClosed: false, packageType: parsedPackageType);
+                review = await _reviewManager.CreateReviewAsync(packageName: codeFile.PackageName, language: codeFile.Language, isClosed: false);
             }
             
             if (createNewRevision)

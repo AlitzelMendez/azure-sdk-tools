@@ -59,7 +59,7 @@ namespace APIViewWeb.Controllers
         public async Task<ActionResult> GenerateReport(
             string? language = null,
             DateTime? startDate = null,
-            int maxResults = 300)
+            int maxResults = 1000)
         {
             try
             {
@@ -187,7 +187,7 @@ namespace APIViewWeb.Controllers
         }
 
 
-        private async Task<List<APIRevisionListItemModel>> QueryCosmosDBAsync(string? language = null, DateTime? startDate = null, int maxResults = 100)
+        private async Task<List<APIRevisionListItemModel>> QueryCosmosDBAsync(string? language = null, DateTime? startDate = null, int maxResults = 150)
         {
             var database = _cosmosClient.GetDatabase("APIViewV2");
             var container = database.GetContainer("APIRevisions");
@@ -199,6 +199,12 @@ namespace APIViewWeb.Controllers
             {
                 whereConditions.Add("c.CreatedOn > @startDate");
                 parameters.Add(("@startDate", startDate.Value.ToString("o")));
+            }
+
+            if (!string.IsNullOrEmpty(language))
+            {
+                whereConditions.Add("c.Language = @language");
+                parameters.Add(("@language", language));    
             }
 
             var whereClause = whereConditions.Any() ? $"WHERE {string.Join(" AND ", whereConditions)}" : "";
@@ -232,7 +238,7 @@ namespace APIViewWeb.Controllers
                 .GroupBy(r => r.Language)
                 .SelectMany(languageGroup => languageGroup
                     .OrderByDescending(r => r.LastUpdatedOn)
-                    .Take(15)) // Take 15 distinct packages per language
+                    .Take(1500)) // Take 15 distinct packages per language
                 .ToList();
 
             return filteredResults;
