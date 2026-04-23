@@ -250,7 +250,7 @@ public class NamespaceManager : INamespaceManager
             if (!string.IsNullOrEmpty(languagePackageInfo?.Namespace))
             {
                 NamespaceDecisionEntry proposed = CreateProposedEntry(userName, lang, languagePackageInfo.PackageName, languagePackageInfo.Namespace);
-                if (approvedReviewsByPackage.TryGetValue(proposed.PackageName, out var approvedReview))
+                if (!string.IsNullOrEmpty(proposed.PackageName) && approvedReviewsByPackage.TryGetValue(proposed.PackageName, out var approvedReview))
                 {
                     ApplyAutoApproval(proposed, approvedReview);
                 }
@@ -280,7 +280,7 @@ public class NamespaceManager : INamespaceManager
                 }
 
                 NamespaceDecisionEntry proposed = CreateProposedEntry(userName, lang, newPkg.PackageName, newNamespace);
-                if (approvedReviewsByPackage.TryGetValue(proposed.PackageName, out var approvedReview))
+                if (!string.IsNullOrEmpty(proposed.PackageName) && approvedReviewsByPackage.TryGetValue(proposed.PackageName, out var approvedReview))
                 {
                     ApplyAutoApproval(proposed, approvedReview);
                 }
